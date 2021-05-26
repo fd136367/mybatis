@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ mapper 是当前文件的根标签，必须的
+ namespace：叫做命名空间，唯一值的，可以是自定义的字符串
+ 要求你使用dao接口的全限定名称
+ 必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<!--在当前文件中，可以使用特定的标签，表示数据库的特定操作。
+    <select>：表示执行查询，select语句
+    <update>:表示更新数据库的操作，就是在<update>标签中，写的是update sql语句
+    <insert>：表示插入，放的是insert语句
+    <delete>:表示删除，执行的delete语句
+-->
+<mapper namespace="com.lenovo.dao.StudentDao">
+    <!--
+    <select>: 查询数据， 标签中必须是 select 语句
+    id: sql 语句的自定义名称，推荐使用 dao 接口中方法名称，
+    使用名称表示要执行的 sql 语句
+    resultType:表示结果类型的，是sql语句执行后得到的ResultSet，遍历这个ResultSet得到java对象的类型
+    查询语句的返回结果数据类型，使用全限定类名
+    -->
+    <select id="selectStudents" resultType="com.lenovo.domain.Student">
+        <!--要执行的 sql 语句-->
+        select id,name,email,age from student order by id
+    </select>
+
+    <!--插入方法-->
+    <insert id="insertStudent">
+        insert into student values(#{id},#{name},#{email},#{age})
+    </insert>
+</mapper>
